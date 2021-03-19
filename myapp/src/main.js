@@ -5,7 +5,6 @@ import Vuesax from 'vuesax'
 
 import 'vuesax/dist/vuesax.css'
 
-
 Vue.config.productionTip = false
 Vue.use(Vuesax, {
   theme: {

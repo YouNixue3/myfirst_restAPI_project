@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <vs-navbar fixed :color="active" center-collapsed v-model="active">
+    <vs-navbar fixed :color="active" square center-collapsed v-model="active">
       <template #left>
-        Logo | TechDesignProgrammer
+        Logo
       </template>
       <template #default>
         <vs-navbar-item :active="active == 'home'" id="home">
@@ -13,6 +13,9 @@
         </vs-navbar-item>
         <vs-navbar-item :active="active == 'blogs'" id="blogs">
           Blogs
+        </vs-navbar-item>
+        <vs-navbar-item :active="active == 'farm'" id="farm">
+          Hydroponic Farm
         </vs-navbar-item>
         <vs-navbar-item :active="active == 'about'" id="about">
           About Us
@@ -29,7 +32,7 @@
               <i class="fi-xnsuxl-setting-solid" style="margin-right:5px;"></i>Settings
             </vs-navbar-item>
             <vs-navbar-item id="logout">
-              <i class="fi-xnllxl-sign-out" style="margin-right:5px;"></i>Logout
+              <i class="fi-xnslxl-sign-out-solid" style="margin-right:5px;"></i>Logout
             </vs-navbar-item>
           </template>
         </vs-navbar-group>
