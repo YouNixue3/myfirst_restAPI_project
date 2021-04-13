@@ -22,121 +22,17 @@
                       </vs-input>
                     </div>
                   </vs-col>
-                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12">
+                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12" v-for="post in newspost" :key="post">
                     <vs-card type="3" id="blogs-content-cards">
                       <template #title>
-                        <h3 class="title-contents">Pot with a plant</h3>
+                        <h3 class="title-contents">{{post.title}}</h3>
                       </template>
                       <template #img>
                         <img class="foto-content" src="../../assets/public/img/woman-with-beauty-long-brown-hair-fashion-model-with-long-straight-hair-fashion-model-posing_186202-8460.jpg" alt="">
                       </template>
                       <template #text>
                         <p class="text-contents">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        </p>
-                      </template>
-                      <template #interactions>
-                        <vs-button danger icon>
-                          <span class="material-icons">favorite_border</span>
-                        </vs-button>
-                        <vs-button class="btn-chat" shadow primary>
-                          <span class="material-icons">chat_bubble_outline</span>
-                          <span class="span">
-                            54
-                          </span>
-                        </vs-button>
-                      </template>
-                    </vs-card>
-                  </vs-col>
-                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12">
-                    <vs-card type="3" id="blogs-content-cards">
-                      <template #title>
-                        <h3 class="title-contents">Pot with a plant</h3>
-                      </template>
-                      <template #img>
-                        <img class="foto-content" src="../../assets/public/img/woman-with-beauty-long-brown-hair-fashion-model-with-long-straight-hair-fashion-model-posing_186202-8460.jpg" alt="">
-                      </template>
-                      <template #text>
-                        <p class="text-contents">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        </p>
-                      </template>
-                      <template #interactions>
-                        <vs-button danger icon>
-                          <span class="material-icons">favorite_border</span>
-                        </vs-button>
-                        <vs-button class="btn-chat" shadow primary>
-                          <span class="material-icons">chat_bubble_outline</span>
-                          <span class="span">
-                            54
-                          </span>
-                        </vs-button>
-                      </template>
-                    </vs-card>
-                  </vs-col>
-                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12">
-                    <vs-card type="3" id="blogs-content-cards">
-                      <template #title>
-                        <h3 class="title-contents">Pot with a plant</h3>
-                      </template>
-                      <template #img>
-                        <img class="foto-content" src="../../assets/public/img/fashion-portrait-young-elegant-woman_1328-2691.jpg" alt="">
-                      </template>
-                      <template #text>
-                        <p class="text-contents">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        </p>
-                      </template>
-                      <template #interactions>
-                        <vs-button danger icon>
-                          <span class="material-icons">favorite_border</span>
-                        </vs-button>
-                        <vs-button class="btn-chat" shadow primary>
-                          <span class="material-icons">chat_bubble_outline</span>
-                          <span class="span">
-                            54
-                          </span>
-                        </vs-button>
-                      </template>
-                    </vs-card>
-                  </vs-col>
-                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12">
-                    <vs-card type="3" id="blogs-content-cards">
-                      <template #title>
-                        <h3 class="title-contents">Pot with a plant</h3>
-                      </template>
-                      <template #img>
-                        <img class="foto-content" src="../../assets/public/img/woman-with-beauty-long-brown-hair-fashion-model-with-long-straight-hair-fashion-model-posing_186202-8460.jpg" alt="">
-                      </template>
-                      <template #text>
-                        <p class="text-contents">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                        </p>
-                      </template>
-                      <template #interactions>
-                        <vs-button danger icon>
-                          <span class="material-icons">favorite_border</span>
-                        </vs-button>
-                        <vs-button class="btn-chat" shadow primary>
-                          <span class="material-icons">chat_bubble_outline</span>
-                          <span class="span">
-                            54
-                          </span>
-                        </vs-button>
-                      </template>
-                    </vs-card>
-                  </vs-col>
-                  <vs-col class="card-blogs" vs-type="flex" vs-justify="flex-end" vs-align="space-around" w="12">
-                    <vs-card type="3" id="blogs-content-cards">
-                      <template #title>
-                        <h3 class="title-contents">Pot with a plant</h3>
-                      </template>
-                      <template #img>
-                        <img class="foto-content" src="../../assets/public/img/fashion-portrait-young-elegant-woman_1328-2691.jpg" alt="">
-                      </template>
-                      <template #text>
-                        <p class="text-contents">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          {{post.content}}
                         </p>
                       </template>
                       <template #interactions>
@@ -164,6 +60,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 // @ is an alias to /src
 // import {VueAgile} from 'vue-agile'
 import Navbar from '../../components/Navbar'
@@ -171,14 +68,24 @@ import Footer from '../../components/Footer'
 
 export default {
   data: () => ({
-    page: 1
+    page: 1,
+    newspost: '',
   }),
   name: 'News',
   components: {
     // agile: VueAgile,
     Navbar,
     Footer
-  }
+  },
+  mounted() {
+    axios.get('http://127.0.0.1:8000/rest-api/newspost/')
+    .then(response => {
+      this.newspost = response.data
+    })
+    .catch(er => {
+      console.log(er)
+    })
+  },
 }
 </script>
 
