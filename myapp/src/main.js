@@ -2,12 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Vuesax from 'vuesax'
+import VueMaterial from 'vue-material'
 
 import '../src/assets/css/costum.css'
 import 'vuesax/dist/vuesax.css'
+// import 'vue-material/dist/vue-material.min.css'
+// import 'vue-material/dist/theme/default.css'
+
 
 Vue.config.productionTip = false
-Vue.use(Vuesax, {
+Vue.use(Vuesax, VueMaterial, {
   theme: {
     colors: {
       primary:'#5b3cc4',

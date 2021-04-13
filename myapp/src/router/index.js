@@ -5,6 +5,7 @@ import About from '../views/About.vue'
 import Blogs from '../views/blogs/Blogs.vue'
 import News from '../views/news/News.vue'
 import indexFarm from '../views/hydroponic_farm/indexFarm.vue'
+import Login from '../views/Auth/Login.vue'
 
 Vue.use(VueRouter)
 
@@ -33,7 +34,12 @@ const routes = [
     path: '/farm',
     name: 'Farm',
     component: indexFarm
-  }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
 ]
 
 const router = new VueRouter({
