@@ -4,26 +4,28 @@
             <center style="margin-left:35%;margin-right:35%;">
                 <div style="padding-top:100px;">
                     <div id="login-card">
-                        <div class="container content-inputs">
+                        <div class="content-inputs">
                             <div class="row">
                                 <vs-row align="center" justify="center">
                                     <vs-col w='12'>
-                                        <h1>L<i class="fi-xnsuxl-lock-solid" v-bind:class="{'fi-xnsuxl-unlock-solid': isActive}" style="font-size:20px;margin:-4px;"></i>gin</h1>
+                                        <h1>Login</h1>
                                     </vs-col>
-                                    <vs-col w='10' style="margin-bottom:15px;">
-                                        <vs-input id="input-login" v-model="value1" placeholder="E-Mail">
-                                            <template #icon>
-                                            <i class="fi-xnluxl-user"></i>
-                                            </template>
-                                        </vs-input>
-                                    </vs-col>
-                                    <vs-col w='10'>
-                                        <vs-input id="input-login" v-model="value1" placeholder="Password">
-                                            <template #icon>
-                                            <i class="fi-xnsuxl-key-alt-solid"></i>
-                                            </template>
-                                        </vs-input>
-                                    </vs-col>
+                                    <form @submit.prevent="login" id="loginForm">
+                                        <vs-col w='12' style="margin-bottom:15px;">
+                                            <vs-input id="input-login" name="username" v-model="username" placeholder="Username">
+                                                <template #icon>
+                                                <span class="material-icons" style="font-size:18px;margin-right:5px;">perm_identity</span>
+                                                </template>
+                                            </vs-input>
+                                        </vs-col>
+                                        <vs-col w='12'>
+                                            <vs-input id="input-login" name="password" v-model="password" placeholder="Password">
+                                                <template #icon>
+                                                <span class="material-icons" style="font-size:18px;margin-right:5px;">vpn_key</span>
+                                                </template>
+                                            </vs-input>
+                                        </vs-col>
+                                    </form>
                                 </vs-row>
                                 <vs-row align="center" justify="center" style="margin-top:20px;">
                                     <router-link to="/" style="text-decoration:none;">
@@ -32,7 +34,7 @@
                                 </vs-row>
                                 <vs-row align="center" justify="center" style="margin-top:20px;">
                                     <vs-col w='3'>
-                                        <vs-button border
+                                        <vs-button border form="loginForm"
                                         >
                                             Login
                                         </vs-button>
@@ -53,16 +55,40 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name:'app',
-    data:() => ({
-        isActive: true
-    }),
-    methods: {
-        login: function() {
-            this.isActive == false
+    data () {
+        return {
+            username: '',
+            password: '',
+            role: '',
+            token: localStorage.getItem('user-token') || null,
         }
-
+    },
+    methods: {
+        login() {
+            axios.post('http://127.0.0.1:8000/rest-api/auth', {
+                username: this.username,
+                password: this.password
+            })
+            // console.log(username)
+            .then(resp => {
+                this.token = resp.data.token
+                console.log(resp)
+                localStorage.setItem('user-token', resp.data.token)
+                localStorage.setItem('group-permission', resp.data.level)
+                this.$router.push("/")
+                // localStorage.setItem('role', resp.data.token)
+            })
+            .catch(e => {
+                console.log(e)
+                localStorage.removeItem('user-token')
+                localStorage.removeItem('group-permission')
+            })
+            
+        },
     },
 }
 </script>
@@ -79,6 +105,6 @@ height: 100vh;
     border-radius: 30px;
 }
 #input-login .vs-input{
-    width:100%;
+    width:20vw;
 }
 </style>

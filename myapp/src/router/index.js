@@ -1,13 +1,37 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+// import Vue from 'vue'
+
+// View
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Blogs from '../views/blogs/Blogs.vue'
 import News from '../views/news/News.vue'
 import indexFarm from '../views/hydroponic_farm/indexFarm.vue'
 import Login from '../views/Auth/Login.vue'
+// import IndexDashboard from '../views/dashboard/Index.vue'
+// import Feed from '../views/dashboard/Feed.vue'
 
-Vue.use(VueRouter)
+// // Layout
+// import Sidebar from '../components/Sidebar.vue'
+
+
+// let dashboardMenu = {
+//   path: '/dashboard',
+//   component: Sidebar,
+//   redirect: '/dashboard/',
+//   name: 'Dashboard',
+//   children: [
+//     {
+//       path: '',
+//       name: 'indexDashboard',
+//       component: IndexDashboard
+//     },
+//     {
+//       path: 'feed',
+//       name: 'Feed',
+//       component: Feed
+//     }
+//   ]
+// };
 
 const routes = [
   {
@@ -42,10 +66,10 @@ const routes = [
   },
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
+// const router = new VueRouter({
+//   mode: 'history',
+//   base: process.env.BASE_URL,
+//   routes
+// })
 
-export default router
+export default routes

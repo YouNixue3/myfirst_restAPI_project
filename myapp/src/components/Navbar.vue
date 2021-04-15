@@ -31,10 +31,10 @@
                         <vs-navbar-item>
                             <span class="material-icons" style="font-size:18px;margin-right:5px;">settings</span>Settings
                         </vs-navbar-item>
-                        <vs-navbar-item>
-                            <span class="material-icons" style="font-size:18px;margin-right:5px;">logout</span>Login
+                        <vs-navbar-item v-on:click="logout" v-if="permission != null">
+                            <span class="material-icons" style="font-size:18px;margin-right:5px;">logout</span>Logout
                         </vs-navbar-item>
-                        <vs-navbar-item>
+                        <vs-navbar-item to="/login" v-if="permission == null">
                             <span class="material-icons" style="font-size:18px;margin-right:5px;">login</span>Login
                         </vs-navbar-item>
                     </template>
@@ -50,6 +50,23 @@
 
 <script>
 export default {
-    name: 'app'
+    name: 'app',
+    data () {
+        return {
+            active: '',
+            permission: localStorage.getItem('group-permission') || null,
+        }
+    },
+    methods: {
+        logout() {
+            // console.log('logout')
+            localStorage.removeItem('user-token')
+            localStorage.removeItem('group-permission')
+            this.$router.push("/login")
+        }
+    },
+    mounted() {
+        this.active = this.$router.history.current.name
+    },
 }
 </script>
