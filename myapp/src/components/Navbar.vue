@@ -5,19 +5,19 @@
                 Logo
             </template>
             <template #default>
-                <vs-navbar-item to="/" class="li" :active="active == 'home'" id="home">
+                <vs-navbar-item to="/home" :active="active == 'indexHome'" id="indexHome">
                     Home
                 </vs-navbar-item>
-                <vs-navbar-item to="/news" :active="active == 'news'" id="news">
+                <vs-navbar-item to="/home/news" :active="active == 'News'" id="News">
                     News
                 </vs-navbar-item>
-                <vs-navbar-item to="/blogs" :active="active == 'blogs'" id="blogs">
+                <vs-navbar-item to="/home/blogs" :active="active == 'Blogs'" id="Blogs">
                     Blogs
                 </vs-navbar-item>
-                <vs-navbar-item to="/farm" :active="active == 'farm'" id="farm">
+                <vs-navbar-item to="/home/farm" :active="active == 'Farm'" id="Farm">
                     Hydroponic Farm
                 </vs-navbar-item>
-                <vs-navbar-item to="/about" :active="active == 'about'" id="about">
+                <vs-navbar-item to="/home/about" :active="active == 'About'" id="About">
                     About Us
                 </vs-navbar-item>
             </template>
@@ -45,6 +45,7 @@
 
             </template>
         </vs-navbar>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -53,7 +54,7 @@ export default {
     name: 'app',
     data () {
         return {
-            active: '',
+            active: this.$router.history.current.name,
             permission: localStorage.getItem('group-permission') || null,
         }
     },
@@ -66,7 +67,8 @@ export default {
         }
     },
     mounted() {
-        this.active = this.$router.history.current.name
+        // this.active = this.$router.history.current.name
+        // console.log(this.active)
     },
 }
 </script>

@@ -63,7 +63,6 @@ export default {
         return {
             username: '',
             password: '',
-            role: '',
             token: localStorage.getItem('user-token') || null,
         }
     },

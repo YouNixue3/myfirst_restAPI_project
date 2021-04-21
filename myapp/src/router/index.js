@@ -7,21 +7,22 @@ import Blogs from '../views/blogs/Blogs.vue'
 import News from '../views/news/News.vue'
 import indexFarm from '../views/hydroponic_farm/indexFarm.vue'
 import Login from '../views/Auth/Login.vue'
-// import IndexDashboard from '../views/dashboard/Index.vue'
-// import Feed from '../views/dashboard/Feed.vue'
+import IndexDashboard from '../views/dashboard/Index.vue'
+import Feed from '../views/dashboard/Feed.vue'
 
-// // Layout
-// import Sidebar from '../components/Sidebar.vue'
+// Layout
+import Navbar from '../components/Navbar.vue'
+import Sidebar from '../components/Sidebar.vue'
 
 
 // let dashboardMenu = {
 //   path: '/dashboard',
-//   component: Sidebar,
-//   redirect: '/dashboard/',
+//   component: IndexDashboard,
+//   redirect: '/dashboard/index',
 //   name: 'Dashboard',
 //   children: [
 //     {
-//       path: '',
+//       path: 'index',
 //       name: 'indexDashboard',
 //       component: IndexDashboard
 //     },
@@ -31,38 +32,69 @@ import Login from '../views/Auth/Login.vue'
 //       component: Feed
 //     }
 //   ]
-// };
+// }
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '',
+    name: 'default',
+    redirect: '/home'
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
-  {
-    path: '/blogs',
-    name: 'Blogs',
-    component: Blogs
-  },
-  {
-    path: '/news',
-    name: 'News',
-    component: News
-  },
-  {
-    path: '/farm',
-    name: 'Farm',
-    component: indexFarm
+    path: '/home',
+    name: 'home',
+    redirect: '/home/',
+    component: Navbar,
+    children: [
+      {
+        path: '',
+        name: 'indexHome',
+        component: Home
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: About
+      },
+      {
+        path: 'blogs',
+        name: 'Blogs',
+        component: Blogs
+      },
+      {
+        path: 'news',
+        name: 'News',
+        component: News
+      },
+      {
+        path: 'farm',
+        name: 'Farm',
+        component: indexFarm
+      }
+    ]
   },
   {
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    redirect: '/dashboard/index',
+    component: Sidebar,
+    children: [
+      {
+        path: 'index',
+        name: 'indexDashboard',
+        component: IndexDashboard
+      },
+      {
+        path: 'feed',
+        name: 'feedDashboard',
+        component: Feed
+      }
+    ]
   },
 ]
 

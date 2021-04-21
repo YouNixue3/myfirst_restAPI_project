@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-  <Navbar/>
+  <!-- <Navbar/> -->
     <div class="square" style="margin-top:-13vh;margin-bottom:80%;">
       <b style="position:relative;margin-left:auto;top:250px;font-size:800%;z-index:1;color:rgb(238, 238, 238);">LeafLife</b>
         <agile ref="carousel" autoplay :autoplay-speed="8000" :timing="'ease'" :speed="1000">
@@ -164,7 +164,7 @@
 // Axios
 import axios from 'axios'
 
-import Navbar from '../components/Navbar'
+// import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 // @ is an alias to /src
@@ -182,7 +182,7 @@ export default {
   name: 'Home',
   components: {
     agile: VueAgile,
-    Navbar,
+    // Navbar,
     Footer
   },
   mounted() {

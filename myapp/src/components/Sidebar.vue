@@ -1,10 +1,10 @@
 <template>
     <div class="hidden">
-        <vs-sidebar absolute hover-expand reduce v-model="active" open>
+        <vs-sidebar hover-expand reduce v-model="active" open>
             <template #logo>
                 Logo
             </template>
-            <vs-sidebar-item to="/dashboard" id="dashboard">
+            <vs-sidebar-item to="/dashboard" id="indexDashboard">
                 <template #icon>
                     <span class="material-icons">dashboard</span>
                 </template>
@@ -26,7 +26,7 @@
                     </template>
                     Profile
                 </vs-sidebar-item>
-                <vs-sidebar-item to="/dashboard/feed" id="myFeed">
+                <vs-sidebar-item to="/dashboard/feed" id="feedDashboard">
                     <template #icon>
                         <span class="material-icons">feed</span>
                     </template>
@@ -63,14 +63,18 @@
                 </vs-sidebar-item>
             </vs-sidebar-group>
         </vs-sidebar>
+        <router-view></router-view>
     </div>
 </template>
 <script>
     export default {
         data () {
             return {
-                active: 'dashboard',
+                active: this.$router.history.current.name,
             }
-        }
+        },
+        mounted() {
+            console.log(this.active)
+        },
     }
 </script>

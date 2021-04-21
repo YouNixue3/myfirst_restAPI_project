@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Navbar/>
+    <!-- <Navbar/> -->
     <div class="square" style="margin-top:0;margin-bottom:80%;">
       <div class="grid" style="margin-top:10px;">
         <div class="center grid">
@@ -64,7 +64,7 @@
 import axios from 'axios';
 // @ is an alias to /src
 // import {VueAgile} from 'vue-agile'
-import Navbar from '../../components/Navbar'
+// import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
 export default {
@@ -75,7 +75,7 @@ export default {
   name: 'Blogs',
   components: {
     // agile: VueAgile,
-    Navbar,
+    // Navbar,
     Footer
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <Navbar />
+    <!-- <Navbar /> -->
     <div class="square" style="margin-top:5vh;margin-bottom:-20%;">
       <img class="backgrounds" style="width:100%;height:500px;object-fit:cover;margin-top:0px;"
         src="../assets/public/img/greenhouse-2139526_1920.jpg" alt="">
@@ -64,13 +64,13 @@
 </template>
 
 <script>
-  import Navbar from '../components/Navbar'
+  // import Navbar from '../components/Navbar'
   import Footer from '../components/Footer'
 
   export default {
     name: 'about',
     components: {
-      Navbar,
+      // Navbar,
       Footer
     }
   }
