@@ -20,9 +20,9 @@
           <vs-row>
             <vs-col offset="1" w="10" style="padding:5px;">
               <div style="background:white;padding:25px;border-radius:50px;">
-                <vs-card id="cardfeeddash" type="3">
+                <vs-card id="cardfeeddash" type="3" v-for="post in dataget.results" :key="post">
                   <template #title>
-                    <h3>Pot with a plant</h3>
+                    <h3>{{post.title}}</h3>
                   </template>
                   <template #img>
                     <img src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ" alt="">
@@ -32,7 +32,7 @@
                       <vs-row>
                         <vs-col w="12">
                           <p style="height:130px;max-height:130px;">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                            {{post.content}}
                           </p>
                         </vs-col>
                         <vs-col offset="10" w="2">
@@ -77,6 +77,12 @@
                     </vs-button>
                   </template>
                 </vs-card>
+                <div class="center">
+                  <div @click="pagi()">
+                    <vs-pagination color="success" v-model="page" :length="pagedata" />
+                  </div>
+                <!-- <button @click="pagi()"></button> -->
+              </div>
               </div>
             </vs-col>
           </vs-row>
@@ -87,6 +93,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   components: {
@@ -94,14 +101,50 @@ export default {
   },
   data() {
     return {
-
+      page: 1,
+      dataget: null,
+      pagedata: null 
     }
   },
   mounted() {
-    
+    axios.get('http://127.0.0.1:8000/rest-api/homepost/')
+    .then(response => {
+      this.dataget = response.data
+      var beforedatapage = response.data.count / 5 
+      var afterdatapage = Math.round(beforedatapage)
+      if (afterdatapage < beforedatapage) {
+        this.pagedata = afterdatapage + 1
+      } else {
+        this.pagedata = afterdatapage
+      }
+    })
+    .catch(er => {
+      console.log(er)
+    })
   },
   methods: {
-
+    pagi() {  
+      // this.page = this.page+1
+      // console.log(this.page)
+      // console.log()
+      axios.get('http://127.0.0.1:8000/rest-api/homepost/?page=' + this.page)
+    .then(response => {
+      this.dataget = response.data
+      console.log(this.dataget)
+    })
+    .catch(er => {
+      console.log(er)
+    })
+      // location.reload()
+      // axios.get('http://127.0.0.1:8000/rest-api/homepost/?page=' + this.page)
+      // .then(response => {
+      //   this.dataget = response.data
+      //   console.log(this.dataget)
+      // })
+      // .catch(er => {
+      //   console.log(er)
+      // })
+    }
   },
 } 
 </script>
